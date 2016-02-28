@@ -105,6 +105,12 @@ document.getElementById("scorep1").innerHTML =r_b-30;
          var ball3x = new Firebase("https://hamnagame.firebaseio.com/ball3x");
          var ball3y = new Firebase("https://hamnagame.firebaseio.com/ball3y");
 
+                  ball1x.set(xbubble[0]);
+                  ball2x.set(xbubble[1]);
+                  ball3x.set(xbubble[2]);
+                  ball1y.set(ybubble[0]);
+                  ball2y.set(ybubble[1]);
+                  ball3y.set(ybubble[2]);
          ball1x.on("child_changed", function(snapshot) {
   xbubble[0]= snapshot.val();
 
