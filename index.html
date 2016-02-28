@@ -1,0 +1,239 @@
+<!doctype html>
+<html>
+<head onload="play_game()">
+<meta charset="UTF-8" />
+<title>Bubble Eater</title>
+ <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+</head>
+<body>
+
+
+<div>
+    <!--Adding a canvas with id canvas-->
+<canvas id="canvas" width="1000" height="600">
+This text is displayed if your browser does not support HTML5 Canvas.
+</canvas>
+</div>
+
+<script type="text/javascript" >
+//declaring variables
+var x = 10;//x change in x_b
+var y = 10;//y change in y_b
+var x_b = 200;//x cordinate of bubble
+var y_b = 200;//y cordinate of bubble
+var r_b=30;
+var x2_b = 100;//x cordinate of bubble
+var y2_b = 100;//y cordinate of bubble
+var r2_b=30;
+var WIDTH = 1000;//rectangle width same as canvas
+var HEIGHT = 600;//rectangle height same as canvas
+var innerRadius = 5;
+var outerRadius = 25; 
+var xbubble=[50,200,500];
+  var ybubble=[100,500,300];  
+
+//*****************************************************************************************************************************
+function draw() {
+ctx.clearRect(0, 0, WIDTH, HEIGHT);// The WIDTH and HEIGHT have the same value as the width an height of the canvas.
+ctx.fillStyle = "white";//canvas background color
+ctx.strokeStyle = "black";//canvas border color
+ctx.beginPath();
+ctx.rect(0,0,WIDTH,HEIGHT);//creating rectangle same size as canvas
+ctx.closePath();
+ctx.fill();//filling the rectangle with same color as canvas(white)
+ctx.stroke();//border color
+//creating a cirle 
+ctx.fillStyle = "purple";
+    ctx.beginPath();
+ctx.arc(x_b, y_b, r_b, 0, Math.PI*2, true);
+ctx.fill();
+ctx.fillStyle = "orange";
+ctx.beginPath();
+ctx.arc(x2_b, y2_b, r2_b, 0, Math.PI*2, true);
+ctx.fill();
+  for(i=0;i<3;i++){
+    draw_circlex(xbubble[i],ybubble[i]);  
+  }
+
+
+    detectCollision(x_b,y_b);
+    detectCollision(x2_b,y2_b);
+
+   
+
+
+  var ref1 = new Firebase("https://temphammad.firebaseio.com/player1x");
+    var ref2 = new Firebase("https://temphammad.firebaseio.com/player1y");
+      var ref3 = new Firebase("https://temphammad.firebaseio.com/player2x");
+    var ref4 = new Firebase("https://temphammad.firebaseio.com/player2y");
+ref1.on("child_changed", function(snapshot) {
+  x_b = snapshot.val();
+
+});
+ref2.on("child_changed", function(snapshot) {
+  y_b = snapshot.val();
+ 
+
+});
+ref3.on("child_changed", function(snapshot) {
+  x2_b = snapshot.val();
+
+});
+ref4.on("child_changed", function(snapshot) {
+  y2_b = snapshot.val();
+ 
+
+});
+}
+    
+    
+    function draw_circlex(ax,by){
+    ctx.fillStyle = "blue";
+    ctx.beginPath();
+    ctx.arc(ax, by, 20, 0, Math.PI*2, true);
+    ctx.fill();
+    
+        
+    }
+    function detectCollision(x_b,y_b)
+    {
+      
+
+
+        for(i=0;i<3;i++)
+          { var c= Math.sqrt(Math.pow((x_b-xbubble[i]),2)+Math.pow((y_b-ybubble[i]),2));
+            var c2= Math.sqrt(Math.pow((x2_b-xbubble[i]),2)+Math.pow((y2_b-ybubble[i]),2));
+         var d=r_b+20;
+
+var f=d-c;
+var f2=d-c2;
+if(f<0)
+{f=-f}
+     if(c==d || f<5 )
+            {
+                r_b=r_b+4;
+                xbubble[i]=letsGetaRandom(WIDTH);
+                ybubble[i]=letsGetaRandom(HEIGHT);
+                
+            }
+ if(f2<0)
+{f2=-f2}
+     if(c2==d || f2<5 )
+            {
+                r2_b=r2_b+4;
+                xbubble[i]=letsGetaRandom(WIDTH);
+                ybubble[i]=letsGetaRandom(HEIGHT);
+                
+            }
+          }   
+    }
+    
+    function letsGetaRandom(range){
+        
+        var a=Math.floor((Math.random()*range)+0);
+return a;
+    }
+//****************************************************************************************************************************
+
+//---------------------------------------------------------------------------------------------------------------------------------
+//This fuction is called when the user press the key. 
+function key_control(event){
+    var ref1 = new Firebase("https://temphammad.firebaseio.com/player1x");
+    var ref2 = new Firebase("https://temphammad.firebaseio.com/player1y");
+switch (event.keyCode) { //The keyCode property returns the Unicode character code of the key that triggered the onkeydown event.
+case 37:  //if left arrow key pressed
+if (x_b - x > 0){//condition to check if the bubble reach the postion out of the canvas
+x_b=x_b - x;
+ref1.set({x_b});
+ref2.set({y_b});
+
+}
+break;
+case 38://up arrow keycode
+if (y_b - y > 0){
+y_b=y_b - y;
+ref1.set({x_b});
+ref2.set({y_b});
+
+}
+break;
+case 39://right arrow keycode
+if (x_b + x < WIDTH){
+x_b=x_b + x;
+ref1.set({x_b});
+ref2.set({y_b});
+
+}
+break;
+case 40://down arrow keycode
+if (y_b + y < HEIGHT){
+y_b=y_b + y;
+ref1.set({x_b});
+ref2.set({y_b});
+
+}
+break;
+}
+}
+//--------------------------------------------------------------------------------------------------------------------------------  
+
+    //---------------------------------------------------------------------------------------------------------------------------------
+//This fuction is called when the user press the key. 
+function key_control2(event){
+  var ref1 = new Firebase("https://temphammad.firebaseio.com/player2x");
+    var ref2 = new Firebase("https://temphammad.firebaseio.com/player2y");
+switch (event.keyCode) { //The keyCode property returns the Unicode character code of the key that triggered the onkeydown event.
+case 65:  //if left arrow key pressed
+if (x2_b - x > 0){//condition to check if the bubble reach the postion out of the canvas
+x2_b=x2_b - x;
+ref1.set({x2_b});
+ref2.set({y2_b});
+}
+break;
+case 87://up arrow keycode
+if (y2_b - y > 0){
+y2_b=y2_b - y;
+ref1.set({x2_b});
+ref2.set({y2_b});
+}
+break;
+case 68://right arrow keycode
+if (x2_b + x < WIDTH){
+x2_b=x2_b + x;
+ref1.set({x2_b});
+ref2.set({y2_b});
+}
+break;
+case 83://down arrow keycode
+if (y2_b + y < HEIGHT){
+y2_b=y2_b + y;
+ref1.set({x2_b});
+ref2.set({y2_b});
+}
+
+break;
+}
+    
+}
+//--------------------------------------------------------------------------------------------------------------------------------  
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++   
+function draw_10() {
+//The setInterval() method calls a function or evaluates an expression at specified intervals (in milliseconds).
+return setInterval(draw, 10);//calls draw function every 10 ms.
+return setInterval(draw2, 10);
+}
+   
+
+
+//****************************************************************************************************************************
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+    draw_10();
+  
+    
+//addEventListener(event, function, useCapture)
+window.addEventListener('keydown',key_control,false);//when the user press key call function key control ,
+window.addEventListener('keydown',key_control2,false);//when the user press key call function key control ,
+</script>
+</body>
+</html>
