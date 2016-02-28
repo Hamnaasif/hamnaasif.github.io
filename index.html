@@ -183,6 +183,16 @@ if(f<0)
                 xbubble[i]=letsGetaRandom(WIDTH);
                 ybubble[i]=letsGetaRandom(HEIGHT);
                  Materialize.toast('Player One Points', 4000) ;
+                 score1.on("child_changed", function(snapshot) {
+ scorep1= snapshot.val();
+
+});  
+  score2.on("child_changed", function(snapshot) {
+ scorep2= snapshot.val();
+
+});  
+  score1.set({scorep1});
+score2.set({scorep2});
             }
  if(f2<0)
 {f2=-f2}
@@ -192,6 +202,17 @@ if(f<0)
                 xbubble[i]=letsGetaRandom(WIDTH);
                 ybubble[i]=letsGetaRandom(HEIGHT);
                  Materialize.toast('Player Two Points', 4000) ;
+                 score1.on("child_changed", function(snapshot) {
+ scorep1= snapshot.val();
+
+
+});  
+  score2.on("child_changed", function(snapshot) {
+ scorep2= snapshot.val();
+
+});  
+  score1.set({scorep1});
+score2.set({scorep2});
             }
           }   
     }
@@ -265,6 +286,8 @@ if (x2_b - x > 0){//condition to check if the bubble reach the postion out of th
 x2_b=x2_b - x;
 ref1.set({x2_b});
 ref2.set({y2_b});
+score1.set({scorep1});
+score2.set({scorep2});
 }
 break;
 case 87://up arrow keycode
@@ -272,6 +295,8 @@ if (y2_b - y > 0){
 y2_b=y2_b - y;
 ref1.set({x2_b});
 ref2.set({y2_b});
+score1.set({scorep1});
+score2.set({scorep2});
 }
 break;
 case 68://right arrow keycode
@@ -279,6 +304,8 @@ if (x2_b + x < WIDTH){
 x2_b=x2_b + x;
 ref1.set({x2_b});
 ref2.set({y2_b});
+score1.set({scorep1});
+score2.set({scorep2});
 }
 break;
 case 83://down arrow keycode
@@ -286,6 +313,8 @@ if (y2_b + y < HEIGHT){
 y2_b=y2_b + y;
 ref1.set({x2_b});
 ref2.set({y2_b});
+score1.set({scorep1});
+score2.set({scorep2});
 }
 
 break;
