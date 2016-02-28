@@ -98,20 +98,35 @@ document.getElementById("scorep1").innerHTML =r_b-30;
     var ref2 = new Firebase("https://hamnagame.firebaseio.com/player1y");
       var ref3 = new Firebase("https://hamnagame.firebaseio.com/player2x");
     var ref4 = new Firebase("https://hamnagame.firebaseio.com/player2y");
-         var ball1= new Firebase("https://hamnagame.firebaseio.com/ball1");
-         var ball2 = new Firebase("https://hamnagame.firebaseio.com/ball2");
-         var ball3 = new Firebase("https://hamnagame.firebaseio.com/ball3");
+         var ball1x= new Firebase("https://hamnagame.firebaseio.com/ball1x");
+         var ball1y= new Firebase("https://hamnagame.firebaseio.com/ball1y");
+         var ball2x = new Firebase("https://hamnagame.firebaseio.com/ball2x");
+          var ball2y= new Firebase("https://hamnagame.firebaseio.com/ball2y");
+         var ball3x = new Firebase("https://hamnagame.firebaseio.com/ball3x");
+         var ball3y = new Firebase("https://hamnagame.firebaseio.com/ball3y");
 
-         ball1.on("child_changed", function(snapshot) {
+         ball1x.on("child_changed", function(snapshot) {
   xbubble[0]= snapshot.val();
 
 });
-           ball2.on("child_changed", function(snapshot) {
+           ball1y.on("child_changed", function(snapshot) {
+  ybubble[0]= snapshot.val();
+
+});
+           ball2x.on("child_changed", function(snapshot) {
   xbubble[1]= snapshot.val();
 
 });
-             ball3.on("child_changed", function(snapshot) {
+            ball2y.on("child_changed", function(snapshot) {
+  ybubble[1]= snapshot.val();
+
+});
+             ball3x.on("child_changed", function(snapshot) {
   xbubble[2]= snapshot.val();
+
+});
+               ball3x.on("child_changed", function(snapshot) {
+  ybubble[2]= snapshot.val();
 
 });
 
@@ -189,9 +204,12 @@ if(f<0)
                 xbubble[i]=letsGetaRandom(WIDTH);
                 ybubble[i]=letsGetaRandom(HEIGHT);
                  Materialize.toast('Player One Points', 4000) ;
-                 ball1.set(xbubble[0]);
-                 ball2.set(xbubble[1]);
-                  ball3.set(xbubble[2]);
+                 ball1x.set(xbubble[0]);
+                  ball2x.set(xbubble[1]);
+                  ball3x.set(xbubble[2]);
+                  ball1y.set(ybubble[0]);
+                  ball2y.set(ybubble[1]);
+                  ball3y.set(ybubble[2]);
             }
  if(f2<0)
 {f2=-f2}
@@ -201,9 +219,12 @@ if(f<0)
                 xbubble[i]=letsGetaRandom(WIDTH);
                 ybubble[i]=letsGetaRandom(HEIGHT);
                  Materialize.toast('Player Two Points', 4000) ;
-                   ball1.set(xbubble[0]);
-                 ball2.set(xbubble[1]);
-                  ball3.set(xbubble[2]);
+                     ball1x.set(xbubble[0]);
+                  ball2x.set(xbubble[1]);
+                  ball3x.set(xbubble[2]);
+                  ball1y.set(ybubble[0]);
+                  ball2y.set(ybubble[1]);
+                  ball3y.set(ybubble[2]);
             }
           }   
     }
