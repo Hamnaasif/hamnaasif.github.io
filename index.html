@@ -216,6 +216,30 @@ if(f<0)
                   ball1y.set(ybubble[0]);
                   ball2y.set(ybubble[1]);
                   ball3y.set(ybubble[2]);
+                          ball1x.on("child_changed", function(snapshot) {
+  xbubble[0]= snapshot.val();
+
+});
+           ball1y.on("child_changed", function(snapshot) {
+  ybubble[0]= snapshot.val();
+
+});
+           ball2x.on("child_changed", function(snapshot) {
+  xbubble[1]= snapshot.val();
+
+});
+            ball2y.on("child_changed", function(snapshot) {
+  ybubble[1]= snapshot.val();
+
+});
+             ball3x.on("child_changed", function(snapshot) {
+  xbubble[2]= snapshot.val();
+
+});
+               ball3x.on("child_changed", function(snapshot) {
+  ybubble[2]= snapshot.val();
+
+});
             }
  if(f2<0)
 {f2=-f2}
@@ -231,6 +255,30 @@ if(f<0)
                   ball1y.set(ybubble[0]);
                   ball2y.set(ybubble[1]);
                   ball3y.set(ybubble[2]);
+                          ball1x.on("child_changed", function(snapshot) {
+  xbubble[0]= snapshot.val();
+
+});
+           ball1y.on("child_changed", function(snapshot) {
+  ybubble[0]= snapshot.val();
+
+});
+           ball2x.on("child_changed", function(snapshot) {
+  xbubble[1]= snapshot.val();
+
+});
+            ball2y.on("child_changed", function(snapshot) {
+  ybubble[1]= snapshot.val();
+
+});
+             ball3x.on("child_changed", function(snapshot) {
+  xbubble[2]= snapshot.val();
+
+});
+               ball3x.on("child_changed", function(snapshot) {
+  ybubble[2]= snapshot.val();
+
+});
             }
           }   
     }
