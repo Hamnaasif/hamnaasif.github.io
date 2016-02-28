@@ -98,9 +98,16 @@ document.getElementById("scorep1").innerHTML =r_b-30;
     var ref2 = new Firebase("https://hamnagame.firebaseio.com/player1y");
     var ref3 = new Firebase("https://hamnagame.firebaseio.com/player2x");
     var ref4 = new Firebase("https://hamnagame.firebaseio.com/player2y");
- var ref5= new Firebase("https://hamnagame.firebaseio.com/sizeone");
-   var ref6= new Firebase("https://hamnagame.firebaseio.com/sizetwo");
 
+    var ref5= new Firebase("https://hamnagame.firebaseio.com/sizeone");
+    var ref6= new Firebase("https://hamnagame.firebaseio.com/sizetwo");
+     var ref7= new Firebase("https://hamnagame.firebaseio.com/ballx1");
+     var ref8= new Firebase("https://hamnagame.firebaseio.com/bally1");
+
+      var ref9= new Firebase("https://hamnagame.firebaseio.com/ballx2");
+     var ref10= new Firebase("https://hamnagame.firebaseio.com/bally2");
+     var ref11= new Firebase("https://hamnagame.firebaseio.com/ballx3");
+     var ref12= new Firebase("https://hamnagame.firebaseio.com/bally3");
 ref1.on("child_changed", function(snapshot) {
   x_b = snapshot.val();
 
@@ -119,7 +126,38 @@ ref4.on("child_changed", function(snapshot) {
  
 
 });
+ref5.on("child_changed", function(snapshot) {
+  r_b = snapshot.val();
+r_b=r_b+30;
+});
+ref6.on("child_changed", function(snapshot) {
+  r2_b = snapshot.val();
+r2_b=r_b+30;
+});
+ref7.on("child_changed", function(snapshot) {
+  bubblex[0] = snapshot.val();
 
+});
+ref8.on("child_changed", function(snapshot) {
+  bubbley[0] = snapshot.val();
+
+});
+ref9.on("child_changed", function(snapshot) {
+  bubblex[1] = snapshot.val();
+
+});
+ref10.on("child_changed", function(snapshot) {
+  bubbley[1] = snapshot.val();
+
+});
+ref11.on("child_changed", function(snapshot) {
+  bubblex[2] = snapshot.val();
+
+});
+ref12.on("child_changed", function(snapshot) {
+  bubbley[2] = snapshot.val();
+
+});
 }
     
     
@@ -160,7 +198,13 @@ if(f<0)
     {
        var ref5= new Firebase("https://hamnagame.firebaseio.com/sizeone");
    var ref6= new Firebase("https://hamnagame.firebaseio.com/sizetwo");
+  var ref7= new Firebase("https://hamnagame.firebaseio.com/ballx1");
+     var ref8= new Firebase("https://hamnagame.firebaseio.com/bally1");
 
+      var ref9= new Firebase("https://hamnagame.firebaseio.com/ballx2");
+     var ref10= new Firebase("https://hamnagame.firebaseio.com/bally2");
+     var ref11= new Firebase("https://hamnagame.firebaseio.com/ballx3");
+     var ref12= new Firebase("https://hamnagame.firebaseio.com/bally3");
 
         for(i=0;i<3;i++)
           { var c= Math.sqrt(Math.pow((x_b-xbubble[i]),2)+Math.pow((y_b-ybubble[i]),2));
@@ -181,6 +225,21 @@ if(f<0)
                  var scorex2=r2_b-30;
  ref5.set({scorex1});
   ref6.set({scorex2});
+  ref5.set({scorex1});
+  ref6.set({scorex2});
+  var one,two,three,four,five,six;
+  one=xbubble[0];
+  two=ybubble[0];
+  three=xbubble[1];
+  four=ybubble[1];
+  five=xbubble[2];
+  six=ybubble[2];
+  ref7.set({one});
+  ref8.set({two});
+    ref9.set({three});
+  ref10.set({four});
+    ref11.set({five});
+  ref12.set({six});
             }
  if(f2<0)
 {f2=-f2}
@@ -192,6 +251,19 @@ if(f<0)
                  Materialize.toast('Player Two Points', 4000) ;
               ref5.set({scorex1});
   ref6.set({scorex2});
+  var one,two,three,four,five,six;
+  one=xbubble[0];
+  two=ybubble[0];
+  three=xbubble[1];
+  four=ybubble[1];
+  five=xbubble[2];
+  six=ybubble[2];
+  ref7.set({one});
+  ref8.set({two});
+    ref9.set({three});
+  ref10.set({four});
+    ref11.set({five});
+  ref12.set({six});
  
             }
           }   
