@@ -48,6 +48,12 @@ This text is displayed if your browser does not support HTML5 Canvas.
 <script type="text/javascript" >
 //declaring variables
      
+    var ref5= new Firebase("https://hamnagame.firebaseio.com/sizeone");
+    var ref6= new Firebase("https://hamnagame.firebaseio.com/sizetwo");
+    var zero=0;
+     ref5.set({zero});
+  ref6.set({zero});
+
 var x = 10;//x change in x_b
 var y = 10;//y change in y_b
 var x_b = 200;//x cordinate of bubble
