@@ -99,7 +99,7 @@ document.getElementById("scorep1").innerHTML =r_b-30;
     var ref3 = new Firebase("https://hamnagame.firebaseio.com/player2x");
     var ref4 = new Firebase("https://hamnagame.firebaseio.com/player2y");
  var ref5= new Firebase("https://hamnagame.firebaseio.com/sizeone");
-   var ref6= new Firebase("https://hamnagame.firebaseio.com/sizeone");
+   var ref6= new Firebase("https://hamnagame.firebaseio.com/sizetwo");
 
 ref1.on("child_changed", function(snapshot) {
   x_b = snapshot.val();
@@ -159,7 +159,7 @@ if(f<0)
     function detectCollision(x_b,y_b)
     {
        var ref5= new Firebase("https://hamnagame.firebaseio.com/sizeone");
-   var ref6= new Firebase("https://hamnagame.firebaseio.com/sizeone");
+   var ref6= new Firebase("https://hamnagame.firebaseio.com/sizetwo");
 
 
         for(i=0;i<3;i++)
