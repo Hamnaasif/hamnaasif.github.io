@@ -94,12 +94,12 @@ document.getElementById("scorep1").innerHTML =r_b-30;
    document.getElementById("scorep2").innerHTML =r2_b-30
 
 
-  var ref1 = new Firebase("https://hamnagame.firebaseio.com/player1x");
+    var ref1 = new Firebase("https://hamnagame.firebaseio.com/player1x");
     var ref2 = new Firebase("https://hamnagame.firebaseio.com/player1y");
-      var ref3 = new Firebase("https://hamnagame.firebaseio.com/player2x");
+    var ref3 = new Firebase("https://hamnagame.firebaseio.com/player2x");
     var ref4 = new Firebase("https://hamnagame.firebaseio.com/player2y");
-
-  
+ var ref5= new Firebase("https://hamnagame.firebaseio.com/sizeone");
+   var ref6= new Firebase("https://hamnagame.firebaseio.com/sizeone");
 
 ref1.on("child_changed", function(snapshot) {
   x_b = snapshot.val();
@@ -119,6 +119,7 @@ ref4.on("child_changed", function(snapshot) {
  
 
 });
+
 }
     
     
@@ -157,7 +158,8 @@ if(f<0)
   }
     function detectCollision(x_b,y_b)
     {
-      
+       var ref5= new Firebase("https://hamnagame.firebaseio.com/sizeone");
+   var ref6= new Firebase("https://hamnagame.firebaseio.com/sizeone");
 
 
         for(i=0;i<3;i++)
@@ -175,7 +177,8 @@ if(f<0)
                 xbubble[i]=letsGetaRandom(WIDTH);
                 ybubble[i]=letsGetaRandom(HEIGHT);
                  Materialize.toast('Player One Points', 4000) ;
- 
+ ref5.set({r_b});
+  ref6.set({r2_b});
             }
  if(f2<0)
 {f2=-f2}
@@ -185,7 +188,8 @@ if(f<0)
                 xbubble[i]=letsGetaRandom(WIDTH);
                 ybubble[i]=letsGetaRandom(HEIGHT);
                  Materialize.toast('Player Two Points', 4000) ;
-                 
+                 ref5.set({r_b});
+  ref6.set({r2_b});
  
             }
           }   
