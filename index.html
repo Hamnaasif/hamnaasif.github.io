@@ -3,20 +3,51 @@
 <head onload="play_game()">
 <meta charset="UTF-8" />
 <title>Bubble Eater</title>
+
+    <script type="text/javascript" src="jquery-2.1.1.min.js"></script>
+      <link rel="stylesheet" href="materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="materialize.min.js"></script>
+     <style>
+       body {
+    background-image: url("http://phandroid.s3.amazonaws.com/wp-content/uploads/2014/06/tools.jpg");
+    background-color: #cccccc;
+}
+    </style>
  <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
 </head>
-<body>
+<body class="container" > 
 
 
+    <div class="row" >
+      <div class="col s12 m6" >
+        <div class="card-panel "style="background-color:#3498db" >
+          <span class="white-text"><h4>Player 1</h4>
+        <h5>Score:</h5>  <p id="scorep1">Score</p>
+
+          </span>
+        </div>
+      </div> <div class="col s12 m6">
+        <div class="card-panel teal">
+          <span class="white-text"><h4>Player 2</h4>
+            <h5>Score:</h5>     <p id="scorep2">Score</p>
+          </span>
+        </div>
+      </div>
+    </div>
+            
 <div>
     <!--Adding a canvas with id canvas-->
-<canvas id="canvas" width="1000" height="600">
+<canvas id="canvas" width="1500" height="680">
 This text is displayed if your browser does not support HTML5 Canvas.
 </canvas>
+    
 </div>
-
+ 
 <script type="text/javascript" >
 //declaring variables
+     
 var x = 10;//x change in x_b
 var y = 10;//y change in y_b
 var x_b = 200;//x cordinate of bubble
@@ -25,29 +56,29 @@ var r_b=30;
 var x2_b = 100;//x cordinate of bubble
 var y2_b = 100;//y cordinate of bubble
 var r2_b=30;
-var WIDTH = 1000;//rectangle width same as canvas
-var HEIGHT = 600;//rectangle height same as canvas
+var WIDTH = 1500;//rectangle width same as canvas
+var HEIGHT = 700;//rectangle height same as canvas
 var innerRadius = 5;
 var outerRadius = 25; 
-var xbubble=[50,200,500];
+var xbubble=[300,200,500];
   var ybubble=[100,500,300];  
 
 //*****************************************************************************************************************************
 function draw() {
 ctx.clearRect(0, 0, WIDTH, HEIGHT);// The WIDTH and HEIGHT have the same value as the width an height of the canvas.
-ctx.fillStyle = "white";//canvas background color
-ctx.strokeStyle = "black";//canvas border color
+ctx.fillStyle = "#34495e";//canvas background color
+ctx.strokeStyle = "#2c3e50";//canvas border color
 ctx.beginPath();
 ctx.rect(0,0,WIDTH,HEIGHT);//creating rectangle same size as canvas
 ctx.closePath();
 ctx.fill();//filling the rectangle with same color as canvas(white)
 ctx.stroke();//border color
 //creating a cirle 
-ctx.fillStyle = "purple";
+ctx.fillStyle = "#e74c3c";
     ctx.beginPath();
 ctx.arc(x_b, y_b, r_b, 0, Math.PI*2, true);
 ctx.fill();
-ctx.fillStyle = "orange";
+ctx.fillStyle = "#3498db";
 ctx.beginPath();
 ctx.arc(x2_b, y2_b, r2_b, 0, Math.PI*2, true);
 ctx.fill();
@@ -58,14 +89,15 @@ ctx.fill();
 
     detectCollision(x_b,y_b);
     detectCollision(x2_b,y2_b);
+    playerend();
+document.getElementById("scorep1").innerHTML =r_b-30;
+   document.getElementById("scorep2").innerHTML =r2_b-30
 
-   
 
-
-  var ref1 = new Firebase("https://temphammad.firebaseio.com/player1x");
-    var ref2 = new Firebase("https://temphammad.firebaseio.com/player1y");
-      var ref3 = new Firebase("https://temphammad.firebaseio.com/player2x");
-    var ref4 = new Firebase("https://temphammad.firebaseio.com/player2y");
+  var ref1 = new Firebase("https://hamnagame.firebaseio.com/player1x");
+    var ref2 = new Firebase("https://hamnagame.firebaseio.com/player1y");
+      var ref3 = new Firebase("https://hamnagame.firebaseio.com/player2x");
+    var ref4 = new Firebase("https://hamnagame.firebaseio.com/player2y");
 ref1.on("child_changed", function(snapshot) {
   x_b = snapshot.val();
 
@@ -88,13 +120,38 @@ ref4.on("child_changed", function(snapshot) {
     
     
     function draw_circlex(ax,by){
-    ctx.fillStyle = "blue";
+    ctx.fillStyle = "#ecf0f1";
     ctx.beginPath();
     ctx.arc(ax, by, 20, 0, Math.PI*2, true);
     ctx.fill();
     
         
     }
+    function playerend(){
+        for(i=0;i<3;i++)
+          { var c= Math.sqrt(Math.pow((x_b-x2_b),2)+Math.pow((y_b-y2_b),2));
+           
+         var d=r_b+r2_b;
+
+var f=d-c;
+
+if(f<0)
+{f=-f}
+     if(c==d || f<5 )
+            {
+               if(r_b>r2_b)
+               {r_b=r_b+50;
+                r2_b=0;
+                Materialize.toast('Player One Wins', 4000) ;} 
+               else
+               {
+                 r2_b=r2_b+50;
+                r_b=0;
+                Materialize.toast('Player Two Wins', 4000) ;
+            }
+               }
+    }
+  }
     function detectCollision(x_b,y_b)
     {
       
@@ -114,7 +171,7 @@ if(f<0)
                 r_b=r_b+4;
                 xbubble[i]=letsGetaRandom(WIDTH);
                 ybubble[i]=letsGetaRandom(HEIGHT);
-                
+                 Materialize.toast('Player One Points', 4000) ;
             }
  if(f2<0)
 {f2=-f2}
@@ -123,7 +180,7 @@ if(f<0)
                 r2_b=r2_b+4;
                 xbubble[i]=letsGetaRandom(WIDTH);
                 ybubble[i]=letsGetaRandom(HEIGHT);
-                
+                 Materialize.toast('Player Two Points', 4000) ;
             }
           }   
     }
@@ -138,8 +195,8 @@ return a;
 //---------------------------------------------------------------------------------------------------------------------------------
 //This fuction is called when the user press the key. 
 function key_control(event){
-    var ref1 = new Firebase("https://temphammad.firebaseio.com/player1x");
-    var ref2 = new Firebase("https://temphammad.firebaseio.com/player1y");
+    var ref1 = new Firebase("https://hamnagame.firebaseio.com/player1x");
+    var ref2 = new Firebase("https://hamnagame.firebaseio.com/player1y");
 switch (event.keyCode) { //The keyCode property returns the Unicode character code of the key that triggered the onkeydown event.
 case 37:  //if left arrow key pressed
 if (x_b - x > 0){//condition to check if the bubble reach the postion out of the canvas
@@ -180,8 +237,8 @@ break;
     //---------------------------------------------------------------------------------------------------------------------------------
 //This fuction is called when the user press the key. 
 function key_control2(event){
-  var ref1 = new Firebase("https://temphammad.firebaseio.com/player2x");
-    var ref2 = new Firebase("https://temphammad.firebaseio.com/player2y");
+  var ref1 = new Firebase("https://hamnagame.firebaseio.com/player2x");
+    var ref2 = new Firebase("https://hamnagame.firebaseio.com/player2y");
 switch (event.keyCode) { //The keyCode property returns the Unicode character code of the key that triggered the onkeydown event.
 case 65:  //if left arrow key pressed
 if (x2_b - x > 0){//condition to check if the bubble reach the postion out of the canvas
@@ -228,6 +285,7 @@ return setInterval(draw2, 10);
 //****************************************************************************************************************************
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
+
     draw_10();
   
     
