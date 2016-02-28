@@ -98,6 +98,8 @@ document.getElementById("scorep1").innerHTML =r_b-30;
     var ref2 = new Firebase("https://hamnagame.firebaseio.com/player1y");
       var ref3 = new Firebase("https://hamnagame.firebaseio.com/player2x");
     var ref4 = new Firebase("https://hamnagame.firebaseio.com/player2y");
+     var size1 = new Firebase("https://hamnagame.firebaseio.com/size1");
+        var size2 = new Firebase("https://hamnagame.firebaseio.com/size2");
 ref1.on("child_changed", function(snapshot) {
   x_b = snapshot.val();
 
@@ -114,6 +116,14 @@ ref3.on("child_changed", function(snapshot) {
 ref4.on("child_changed", function(snapshot) {
   y2_b = snapshot.val();
  
+
+});
+size1.on("child_changed", function(snapshot) {
+  r_b = snapshot.val();
+
+});
+size2.on("child_changed", function(snapshot) {
+  r2_b = snapshot.val();
 
 });
 }
@@ -169,6 +179,7 @@ if(f<0)
      if(c==d || f<5 )
             {
                 r_b=r_b+4;
+                size1.set({r_b});
                 xbubble[i]=letsGetaRandom(WIDTH);
                 ybubble[i]=letsGetaRandom(HEIGHT);
                  Materialize.toast('Player One Points', 4000) ;
@@ -178,6 +189,7 @@ if(f<0)
      if(c2==d || f2<5 )
             {
                 r2_b=r2_b+4;
+                  size2.set({r2_b});
                 xbubble[i]=letsGetaRandom(WIDTH);
                 ybubble[i]=letsGetaRandom(HEIGHT);
                  Materialize.toast('Player Two Points', 4000) ;
