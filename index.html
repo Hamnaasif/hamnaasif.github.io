@@ -98,17 +98,10 @@ document.getElementById("scorep1").innerHTML =r_b-30;
     var ref2 = new Firebase("https://hamnagame.firebaseio.com/player1y");
       var ref3 = new Firebase("https://hamnagame.firebaseio.com/player2x");
     var ref4 = new Firebase("https://hamnagame.firebaseio.com/player2y");
-     var score1= new Firebase("https://hamnagame.firebaseio.com/scorea");
-      var score2 = new Firebase("https://hamnagame.firebaseio.com/scoreb");
+     var score1= new Firebase("https://hamnagame.firebaseio.com/sizea");
+      var score2 = new Firebase("https://hamnagame.firebaseio.com/sizeb");
   
-  score1.on("child_changed", function(snapshot) {
- scorep1= snapshot.val();
-
-});  
-  score2.on("child_changed", function(snapshot) {
- scorep2= snapshot.val();
-
-});  
+  
 ref1.on("child_changed", function(snapshot) {
   x_b = snapshot.val();
 
@@ -183,16 +176,7 @@ if(f<0)
                 xbubble[i]=letsGetaRandom(WIDTH);
                 ybubble[i]=letsGetaRandom(HEIGHT);
                  Materialize.toast('Player One Points', 4000) ;
-                 score1.on("child_changed", function(snapshot) {
- scorep1= snapshot.val();
-
-});  
-  score2.on("child_changed", function(snapshot) {
- scorep2= snapshot.val();
-
-});  
-  score1.set({scorep1});
-score2.set({scorep2});
+              
             }
  if(f2<0)
 {f2=-f2}
@@ -202,18 +186,7 @@ score2.set({scorep2});
                 xbubble[i]=letsGetaRandom(WIDTH);
                 ybubble[i]=letsGetaRandom(HEIGHT);
                  Materialize.toast('Player Two Points', 4000) ;
-                 score1.on("child_changed", function(snapshot) {
- scorep1= snapshot.val();
-
-
-});  
-  score2.on("child_changed", function(snapshot) {
- scorep2= snapshot.val();
-
-});  
-  score1.set({scorep1});
-score2.set({scorep2});
-            }
+               
           }   
     }
     
@@ -229,16 +202,17 @@ return a;
 function key_control(event){
     var ref1 = new Firebase("https://hamnagame.firebaseio.com/player1x");
     var ref2 = new Firebase("https://hamnagame.firebaseio.com/player1y");
-      var score1= new Firebase("https://hamnagame.firebaseio.com/scorea");
-      var score2 = new Firebase("https://hamnagame.firebaseio.com/scoreb");
+         var score1= new Firebase("https://hamnagame.firebaseio.com/sizea");
+      var score2 = new Firebase("https://hamnagame.firebaseio.com/sizeb");
+   
 switch (event.keyCode) { //The keyCode property returns the Unicode character code of the key that triggered the onkeydown event.
 case 37:  //if left arrow key pressed
 if (x_b - x > 0){//condition to check if the bubble reach the postion out of the canvas
 x_b=x_b - x;
 ref1.set({x_b});
 ref2.set({y_b});
-score1.set({scorep1});
-score2.set({scorep2});
+score1.set({r_b});
+score2.set({r2_b});
 }
 break;
 case 38://up arrow keycode
@@ -246,8 +220,8 @@ if (y_b - y > 0){
 y_b=y_b - y;
 ref1.set({x_b});
 ref2.set({y_b});
-score1.set({scorep1});
-score2.set({scorep2});
+score1.set({r_b});
+score2.set({r2_b});
 
 }
 break;
@@ -256,9 +230,8 @@ if (x_b + x < WIDTH){
 x_b=x_b + x;
 ref1.set({x_b});
 ref2.set({y_b});
-score1.set({scorep1});
-score2.set({scorep2});
-
+score1.set({r_b});
+score2.set({r2_b});
 }
 break;
 case 40://down arrow keycode
@@ -266,9 +239,8 @@ if (y_b + y < HEIGHT){
 y_b=y_b + y;
 ref1.set({x_b});
 ref2.set({y_b});
-score1.set({scorep1});
-score2.set({scorep2});
-
+score1.set({r_b});
+score2.set({r2_b});
 }
 break;
 }
@@ -280,16 +252,18 @@ break;
 function key_control2(event){
   var ref1 = new Firebase("https://hamnagame.firebaseio.com/player2x");
     var ref2 = new Firebase("https://hamnagame.firebaseio.com/player2y");
-     var score1= new Firebase("https://hamnagame.firebaseio.com/scorea");
-      var score2 = new Firebase("https://hamnagame.firebaseio.com/scoreb");
+        var score1= new Firebase("https://hamnagame.firebaseio.com/sizea");
+      var score2 = new Firebase("https://hamnagame.firebaseio.com/sizeb");
+     
 switch (event.keyCode) { //The keyCode property returns the Unicode character code of the key that triggered the onkeydown event.
 case 65:  //if left arrow key pressed
 if (x2_b - x > 0){//condition to check if the bubble reach the postion out of the canvas
 x2_b=x2_b - x;
 ref1.set({x2_b});
 ref2.set({y2_b});
-score1.set({scorep1});
-score2.set({scorep2});
+score1.set({r_b});
+score2.set({r2_b});
+
 }
 break;
 case 87://up arrow keycode
@@ -297,8 +271,8 @@ if (y2_b - y > 0){
 y2_b=y2_b - y;
 ref1.set({x2_b});
 ref2.set({y2_b});
-score1.set({scorep1});
-score2.set({scorep2});
+score1.set({r_b});
+score2.set({r2_b});
 }
 break;
 case 68://right arrow keycode
@@ -306,8 +280,8 @@ if (x2_b + x < WIDTH){
 x2_b=x2_b + x;
 ref1.set({x2_b});
 ref2.set({y2_b});
-score1.set({scorep1});
-score2.set({scorep2});
+score1.set({r_b});
+score2.set({r2_b});
 }
 break;
 case 83://down arrow keycode
@@ -315,8 +289,8 @@ if (y2_b + y < HEIGHT){
 y2_b=y2_b + y;
 ref1.set({x2_b});
 ref2.set({y2_b});
-score1.set({scorep1});
-score2.set({scorep2});
+score1.set({r_b});
+score2.set({r2_b});
 }
 
 break;
