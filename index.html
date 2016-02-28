@@ -98,44 +98,17 @@ document.getElementById("scorep1").innerHTML =r_b-30;
     var ref2 = new Firebase("https://hamnagame.firebaseio.com/player1y");
       var ref3 = new Firebase("https://hamnagame.firebaseio.com/player2x");
     var ref4 = new Firebase("https://hamnagame.firebaseio.com/player2y");
-         var ball1x= new Firebase("https://hamnagame.firebaseio.com/ball1x");
-         var ball1y= new Firebase("https://hamnagame.firebaseio.com/ball1y");
-         var ball2x = new Firebase("https://hamnagame.firebaseio.com/ball2x");
-          var ball2y= new Firebase("https://hamnagame.firebaseio.com/ball2y");
-         var ball3x = new Firebase("https://hamnagame.firebaseio.com/ball3x");
-         var ball3y = new Firebase("https://hamnagame.firebaseio.com/ball3y");
+     var score1= new Firebase("https://hamnagame.firebaseio.com/score1");
+      var score2 = new Firebase("https://hamnagame.firebaseio.com/score2");
+  
+  score1.on("child_changed", function(snapshot) {
+ scorep1= snapshot.val();
 
-                  ball1x.set(xbubble[0]);
-                  ball2x.set(xbubble[1]);
-                  ball3x.set(xbubble[2]);
-                  ball1y.set(ybubble[0]);
-                  ball2y.set(ybubble[1]);
-                  ball3y.set(ybubble[2]);
-         ball1x.on("child_changed", function(snapshot) {
-  xbubble[0]= snapshot.val();
+});  
+  score2.on("child_changed", function(snapshot) {
+ scorep2= snapshot.val();
 
-});
-           ball1y.on("child_changed", function(snapshot) {
-  ybubble[0]= snapshot.val();
-
-});
-           ball2x.on("child_changed", function(snapshot) {
-  xbubble[1]= snapshot.val();
-
-});
-            ball2y.on("child_changed", function(snapshot) {
-  ybubble[1]= snapshot.val();
-
-});
-             ball3x.on("child_changed", function(snapshot) {
-  xbubble[2]= snapshot.val();
-
-});
-               ball3x.on("child_changed", function(snapshot) {
-  ybubble[2]= snapshot.val();
-
-});
-
+});  
 ref1.on("child_changed", function(snapshot) {
   x_b = snapshot.val();
 
@@ -210,36 +183,6 @@ if(f<0)
                 xbubble[i]=letsGetaRandom(WIDTH);
                 ybubble[i]=letsGetaRandom(HEIGHT);
                  Materialize.toast('Player One Points', 4000) ;
-                 ball1x.set(xbubble[0]);
-                  ball2x.set(xbubble[1]);
-                  ball3x.set(xbubble[2]);
-                  ball1y.set(ybubble[0]);
-                  ball2y.set(ybubble[1]);
-                  ball3y.set(ybubble[2]);
-                          ball1x.on("child_changed", function(snapshot) {
-  xbubble[0]= snapshot.val();
-
-});
-           ball1y.on("child_changed", function(snapshot) {
-  ybubble[0]= snapshot.val();
-
-});
-           ball2x.on("child_changed", function(snapshot) {
-  xbubble[1]= snapshot.val();
-
-});
-            ball2y.on("child_changed", function(snapshot) {
-  ybubble[1]= snapshot.val();
-
-});
-             ball3x.on("child_changed", function(snapshot) {
-  xbubble[2]= snapshot.val();
-
-});
-               ball3x.on("child_changed", function(snapshot) {
-  ybubble[2]= snapshot.val();
-
-});
             }
  if(f2<0)
 {f2=-f2}
@@ -249,36 +192,6 @@ if(f<0)
                 xbubble[i]=letsGetaRandom(WIDTH);
                 ybubble[i]=letsGetaRandom(HEIGHT);
                  Materialize.toast('Player Two Points', 4000) ;
-                     ball1x.set(xbubble[0]);
-                  ball2x.set(xbubble[1]);
-                  ball3x.set(xbubble[2]);
-                  ball1y.set(ybubble[0]);
-                  ball2y.set(ybubble[1]);
-                  ball3y.set(ybubble[2]);
-                          ball1x.on("child_changed", function(snapshot) {
-  xbubble[0]= snapshot.val();
-
-});
-           ball1y.on("child_changed", function(snapshot) {
-  ybubble[0]= snapshot.val();
-
-});
-           ball2x.on("child_changed", function(snapshot) {
-  xbubble[1]= snapshot.val();
-
-});
-            ball2y.on("child_changed", function(snapshot) {
-  ybubble[1]= snapshot.val();
-
-});
-             ball3x.on("child_changed", function(snapshot) {
-  xbubble[2]= snapshot.val();
-
-});
-               ball3x.on("child_changed", function(snapshot) {
-  ybubble[2]= snapshot.val();
-
-});
             }
           }   
     }
@@ -295,13 +208,16 @@ return a;
 function key_control(event){
     var ref1 = new Firebase("https://hamnagame.firebaseio.com/player1x");
     var ref2 = new Firebase("https://hamnagame.firebaseio.com/player1y");
+      var score1= new Firebase("https://hamnagame.firebaseio.com/score1");
+      var score2 = new Firebase("https://hamnagame.firebaseio.com/score2");
 switch (event.keyCode) { //The keyCode property returns the Unicode character code of the key that triggered the onkeydown event.
 case 37:  //if left arrow key pressed
 if (x_b - x > 0){//condition to check if the bubble reach the postion out of the canvas
 x_b=x_b - x;
 ref1.set({x_b});
 ref2.set({y_b});
-
+score1.set({scorep1});
+score2.set({scorep2});
 }
 break;
 case 38://up arrow keycode
@@ -309,6 +225,8 @@ if (y_b - y > 0){
 y_b=y_b - y;
 ref1.set({x_b});
 ref2.set({y_b});
+score1.set({scorep1});
+score2.set({scorep2});
 
 }
 break;
@@ -317,6 +235,8 @@ if (x_b + x < WIDTH){
 x_b=x_b + x;
 ref1.set({x_b});
 ref2.set({y_b});
+score1.set({scorep1});
+score2.set({scorep2});
 
 }
 break;
@@ -325,6 +245,8 @@ if (y_b + y < HEIGHT){
 y_b=y_b + y;
 ref1.set({x_b});
 ref2.set({y_b});
+score1.set({scorep1});
+score2.set({scorep2});
 
 }
 break;
